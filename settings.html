@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0e0e10">
+  <title>Settings · Money Tracker</title>
+  <link rel="icon" href="static/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="apple-mobile-web-app-title" content="Money">
+  <script>try{var t=localStorage.getItem("mt.themeCache");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body data-page="settings" data-csrf="offline">
+
+<div class="app">
+  <aside class="sidebar" aria-label="Main navigation">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">د.ع</span>
+      <span class="brand-text"><strong>Money Tracker</strong><small>Driver finances</small></span>
+    </a>
+    <nav>
+      
+      <a href="index.html" class="nav-link">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg><span>Dashboard</span>
+      </a>
+      
+      <a href="transactions.html" class="nav-link">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>Transactions</span>
+      </a>
+      
+      <a href="shifts.html" class="nav-link">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8v5l3 2M12 3a9 9 0 100 18 9 9 0 000-18z"/></svg><span>Shifts</span>
+      </a>
+      
+      <a href="fuel.html" class="nav-link">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V5a2 2 0 012-2h6a2 2 0 012 2v16M5 21h10M15 9h2a2 2 0 012 2v5a1.5 1.5 0 003 0V8l-3-3M7 8h6"/></svg><span>Fuel</span>
+      </a>
+      
+      <a href="budgets.html" class="nav-link">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 109 9h-9V3z"/></svg><span>Budgets</span>
+      </a>
+      
+      <a href="goals.html" class="nav-link">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.6-7-11a4 4 0 017-2.6A4 4 0 0119 10c0 6.4-7 11-7 11z"/></svg><span>Savings</span>
+      </a>
+      
+      <a href="reports.html" class="nav-link">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10m6 10V4m6 16v-7m4 7H2"/></svg><span>Reports</span>
+      </a>
+      
+      <a href="settings.html" class="nav-link active" aria-current="page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a3 3 0 100-6 3 3 0 000 6zm7.4-3a7.4 7.4 0 00-.1-1.2l2-1.6-2-3.4-2.4 1a7.6 7.6 0 00-2-1.2L14.5 3h-4l-.4 2.6a7.6 7.6 0 00-2 1.2l-2.4-1-2 3.4 2 1.6a7.4 7.4 0 000 2.4l-2 1.6 2 3.4 2.4-1a7.6 7.6 0 002 1.2l.4 2.6h4l.4-2.6a7.6 7.6 0 002-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z"/></svg><span>Settings</span>
+      </a>
+      
+    </nav>
+    <div class="sidebar-foot">
+      <button class="btn btn-primary btn-block" data-quick-add type="button">+ Add transaction</button>
+      <button class="btn btn-ghost btn-block" id="themeToggle" type="button">Switch theme</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <a class="brand brand-compact" href="index.html"><span class="brand-mark" aria-hidden="true">د.ع</span><strong>Money Tracker</strong></a>
+      <h1 class="page-title">Settings</h1>
+      <div class="topbar-actions">
+        <button class="btn btn-primary btn-sm hide-mobile" data-quick-add type="button">+ Add</button>
+        
+      </div>
+    </header>
+    <main id="content" class="content">
+      
+<div class="grid cols-2">
+  <section class="card stack">
+    <div class="card-head"><h2>General</h2></div>
+    <div class="field"><label for="s_start">Starting balance (cash you had before using the app)</label>
+      <div class="amount-wrap"><input id="s_start" type="text" inputmode="numeric" placeholder="0"><span id="s_cur">IQD</span></div>
+      <span class="hint">Available balance = starting balance + income − expenses ± transfers − money set aside for savings.</span></div>
+    <div class="form-grid">
+      <div class="field"><label for="s_unit">Distance unit</label><select id="s_unit"><option value="km">Kilometers</option><option value="mi">Miles</option></select></div>
+      <div class="field"><label for="s_week">Week starts on</label><select id="s_week"><option value="saturday">Saturday</option><option value="sunday">Sunday</option><option value="monday">Monday</option></select></div>
+      <div class="field"><label for="s_currency">Currency label</label><select id="s_currency"><option value="IQD">IQD</option><option value="د.ع">د.ع</option></select></div>
+      <div class="field"><label for="s_vehicle">Vehicle</label><input id="s_vehicle" type="text" maxlength="60"></div>
+    </div>
+    <div class="form-error" id="genErr" hidden></div>
+    <button class="btn btn-primary" id="saveGeneral" type="button">Save settings</button>
+  </section>
+
+  <section class="card stack">
+    <div class="card-head"><h2>Categories</h2><button class="btn btn-sm btn-primary" id="addCat" type="button">+ New category</button></div>
+    <div id="catList" class="tx-list"></div>
+    <p class="small muted">Built-in categories can't be changed. Deleting a custom category that already has transactions hides it from new entries but keeps your history intact.</p>
+  </section>
+
+  <section class="card stack">
+    <div class="card-head"><h2>Backup &amp; restore</h2></div>
+    <p class="small muted">Your data is stored <strong>only on this phone</strong>, inside the app. Nothing is sent to any server. If you delete the app, clear Safari website data, or lose the phone, the data is gone, so download a backup regularly and keep it in the Files app or iCloud.</p><code id="dbPath" hidden></code>
+    
+    <div class="row"><a class="btn btn-primary" href="backup" download>⬇ Download database backup</a>
+      <a class="btn" href="export/transactions.csv" download>⬇ All transactions (CSV)</a></div>
+    <div class="field"><label for="restoreFile">Restore from a backup file (.db)</label><input id="restoreFile" type="file" accept=".db,.sqlite,.sqlite3,application/octet-stream"><span class="hint">Replaces everything currently in the app. A safety copy of the current data is saved first on this phone.</span></div>
+    <button class="btn btn-danger" id="restoreBtn" type="button">Restore selected backup</button>
+    <button class="btn" id="undoRestore" type="button" hidden>↩ Undo last restore</button>
+    <div class="small muted" id="counts"></div>
+  </section>
+
+  <section class="card stack">
+    <div class="card-head"><h2>Sample data</h2></div>
+    <p class="small muted">Load made-up shifts, fuel fill-ups, budgets and goals to explore the app. Sample entries are marked <span class="chip demo">demo</span>. “Remove sample data” deletes <strong>only</strong> those entries. Anything you added yourself, or edited after loading, is kept.</p>
+    <div class="row"><button class="btn" id="loadDemo" type="button">Load sample data</button><button class="btn btn-danger" id="removeDemo" type="button">Remove sample data</button></div>
+    <div class="small" id="demoInfo"></div>
+  </section>
+
+  <section class="card stack" hidden>
+    <div class="card-head"><h2>Password</h2></div>
+    <p class="small muted" id="authInfo"></p>
+    <div id="authForm" class="stack">
+      <div class="field" id="curWrap" data-field="current" hidden><label for="p_cur">Current password</label><input id="p_cur" type="password" autocomplete="current-password"><span class="err"></span></div>
+      <div class="field" data-field="new"><label for="p_new">New password (min. 8 characters)</label><input id="p_new" type="password" autocomplete="new-password"><span class="err"></span></div>
+      <div class="row"><button class="btn btn-primary" id="setPass" type="button">Set password</button><button class="btn btn-danger" id="removePass" type="button" hidden>Remove password</button></div>
+    </div>
+    <p class="xs faint">Passwords are stored as salted hashes, never as plain text. The password only matters if other devices can reach the app (e.g. your phone on Wi-Fi). Anyone with access to the files on this computer can still read the database. It is not encrypted.</p>
+  </section>
+
+  <section class="card stack" hidden>
+    <div class="card-head"><h2>Open on your phone</h2></div>
+    <p class="small muted">Start the app with <code>run_on_wifi.bat</code> (Windows), then on your phone (same Wi-Fi) open <code>http://YOUR-PC-IP:5000</code>. Find the IP with <code>ipconfig</code> → “IPv4 Address”. Set a password first.</p>
+    <p class="small muted">Tip: in your phone browser choose “Add to Home screen” to open it like an app.</p>
+  </section>
+</div>
+
+    </main>
+  </div>
+</div>
+
+<nav class="tabbar" aria-label="Mobile navigation">
+  
+  <a href="index.html" class="tab"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg><span>Dashboard</span></a>
+  
+  <a href="transactions.html" class="tab"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>Transactions</span></a>
+  
+  <a href="shifts.html" class="tab"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8v5l3 2M12 3a9 9 0 100 18 9 9 0 000-18z"/></svg><span>Shifts</span></a>
+  
+  <a href="fuel.html" class="tab"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V5a2 2 0 012-2h6a2 2 0 012 2v16M5 21h10M15 9h2a2 2 0 012 2v5a1.5 1.5 0 003 0V8l-3-3M7 8h6"/></svg><span>Fuel</span></a>
+  
+  <button class="tab tab-add" data-quick-add type="button" aria-label="Add transaction"><span>+</span></button>
+  <button class="tab" id="moreBtn" type="button" aria-haspopup="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h.01M12 12h.01M19 12h.01"/></svg><span>More</span></button>
+</nav>
+<div class="more-sheet" id="moreSheet" hidden>
+  
+  <a href="budgets.html" class="nav-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 109 9h-9V3z"/></svg><span>Budgets</span></a>
+  
+  <a href="goals.html" class="nav-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.6-7-11a4 4 0 017-2.6A4 4 0 0119 10c0 6.4-7 11-7 11z"/></svg><span>Savings</span></a>
+  
+  <a href="reports.html" class="nav-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10m6 10V4m6 16v-7m4 7H2"/></svg><span>Reports</span></a>
+  
+  <a href="settings.html" class="nav-link active"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a3 3 0 100-6 3 3 0 000 6zm7.4-3a7.4 7.4 0 00-.1-1.2l2-1.6-2-3.4-2.4 1a7.6 7.6 0 00-2-1.2L14.5 3h-4l-.4 2.6a7.6 7.6 0 00-2 1.2l-2.4-1-2 3.4 2 1.6a7.4 7.4 0 000 2.4l-2 1.6 2 3.4 2.4-1a7.6 7.6 0 002 1.2l.4 2.6h4l.4-2.6a7.6 7.6 0 002-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z"/></svg><span>Settings</span></a>
+  
+  <button class="nav-link" id="themeToggle2" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg><span>Switch theme</span></button>
+</div>
+
+<div id="modalRoot"></div>
+<div id="toasts" class="toasts" aria-live="polite"></div>
+
+<script src="shim.js" data-scripts="static/js/vendor/chart.umd.js,static/js/app.js,static/js/settings.js"></script>
+</body>
+</html>

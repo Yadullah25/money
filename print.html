@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Report · Money Tracker</title>
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body { font: 13px/1.5 "Segoe UI", system-ui, "Noto Sans Arabic", Arial, sans-serif; color: #111; margin: 0; padding: 28px 34px; background: #fff; }
+    h1 { font-size: 22px; margin: 0 0 2px; } h2 { font-size: 14px; margin: 22px 0 8px; border-bottom: 2px solid #f5b82e; padding-bottom: 4px; }
+    .sub { color: #666; } table { width: 100%; border-collapse: collapse; } th, td { padding: 6px 8px; border-bottom: 1px solid #e3e3e3; text-align: left; }
+    th { font-size: 11px; text-transform: uppercase; color: #666; } td.r, th.r { text-align: right; } .num { font-variant-numeric: tabular-nums; direction: ltr; unicode-bidi: isolate; }
+    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px; } .kpi { border: 1px solid #ddd; border-radius: 8px; padding: 9px 11px; }
+    .kpi small { display: block; color: #666; } .kpi b { font-size: 16px; } .pos { color: #0a7d4e; } .neg { color: #c62f2f; }
+    .bar { height: 7px; background: #eee; border-radius: 9px; overflow: hidden; } .bar i { display: block; height: 100%; background: #f5b82e; }
+    tfoot td { font-weight: 700; border-top: 2px solid #999; }
+    .actions { margin-bottom: 18px; } .actions button { padding: 9px 18px; border-radius: 8px; border: 0; background: #f5b82e; font-weight: 700; cursor: pointer; font-size: 14px; }
+    footer { margin-top: 26px; color: #888; font-size: 11px; } @media print { .actions { display: none; } body { padding: 0; } h2 { break-after: avoid; } tr { break-inside: avoid; } }
+  </style>
+</head>
+<body>
+  <div id="report"><p class="sub">Preparing report…</p></div>
+  <script src="shim.js" data-scripts="static/js/print_offline.js"></script>
+</body>
+</html>

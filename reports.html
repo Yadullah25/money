@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0e0e10">
+  <title>Reports · Money Tracker</title>
+  <link rel="icon" href="static/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="apple-mobile-web-app-title" content="Money">
+  <script>try{var t=localStorage.getItem("mt.themeCache");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body data-page="reports" data-csrf="offline">
+
+<div class="app">
+  <aside class="sidebar" aria-label="Main navigation">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">د.ع</span>
+      <span class="brand-text"><strong>Money Tracker</strong><small>Driver finances</small></span>
+    </a>
+    <nav>
+      
+      <a href="index.html" class="nav-link">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg><span>Dashboard</span>
+      </a>
+      
+      <a href="transactions.html" class="nav-link">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>Transactions</span>
+      </a>
+      
+      <a href="shifts.html" class="nav-link">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8v5l3 2M12 3a9 9 0 100 18 9 9 0 000-18z"/></svg><span>Shifts</span>
+      </a>
+      
+      <a href="fuel.html" class="nav-link">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V5a2 2 0 012-2h6a2 2 0 012 2v16M5 21h10M15 9h2a2 2 0 012 2v5a1.5 1.5 0 003 0V8l-3-3M7 8h6"/></svg><span>Fuel</span>
+      </a>
+      
+      <a href="budgets.html" class="nav-link">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 109 9h-9V3z"/></svg><span>Budgets</span>
+      </a>
+      
+      <a href="goals.html" class="nav-link">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.6-7-11a4 4 0 017-2.6A4 4 0 0119 10c0 6.4-7 11-7 11z"/></svg><span>Savings</span>
+      </a>
+      
+      <a href="reports.html" class="nav-link active" aria-current="page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10m6 10V4m6 16v-7m4 7H2"/></svg><span>Reports</span>
+      </a>
+      
+      <a href="settings.html" class="nav-link">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a3 3 0 100-6 3 3 0 000 6zm7.4-3a7.4 7.4 0 00-.1-1.2l2-1.6-2-3.4-2.4 1a7.6 7.6 0 00-2-1.2L14.5 3h-4l-.4 2.6a7.6 7.6 0 00-2 1.2l-2.4-1-2 3.4 2 1.6a7.4 7.4 0 000 2.4l-2 1.6 2 3.4 2.4-1a7.6 7.6 0 002 1.2l.4 2.6h4l.4-2.6a7.6 7.6 0 002-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z"/></svg><span>Settings</span>
+      </a>
+      
+    </nav>
+    <div class="sidebar-foot">
+      <button class="btn btn-primary btn-block" data-quick-add type="button">+ Add transaction</button>
+      <button class="btn btn-ghost btn-block" id="themeToggle" type="button">Switch theme</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <a class="brand brand-compact" href="index.html"><span class="brand-mark" aria-hidden="true">د.ع</span><strong>Money Tracker</strong></a>
+      <h1 class="page-title">Reports &amp; analytics</h1>
+      <div class="topbar-actions">
+        <button class="btn btn-primary btn-sm hide-mobile" data-quick-add type="button">+ Add</button>
+        
+      </div>
+    </header>
+    <main id="content" class="content">
+      
+<div id="rangeBar"></div>
+<div class="row between" style="margin-bottom:16px">
+  <div class="row"><span class="small muted">Group by</span>
+    <div class="seg" id="groupSeg" role="group" aria-label="Group by">
+      <button type="button" data-g="">Auto</button><button type="button" data-g="day">Daily</button><button type="button" data-g="week">Weekly</button><button type="button" data-g="month">Monthly</button><button type="button" data-g="year">Yearly</button>
+    </div></div>
+  <div class="row"><a class="btn" id="csvBtn" href="export/report.csv" download>⬇ Report CSV</a><a class="btn btn-primary" id="printBtn" href="print.html" target="_blank" rel="noopener">🖨 Printable report</a></div>
+</div>
+
+<section class="grid cols-4" id="repStats"></section>
+
+<section class="grid cols-65" style="margin-top:16px">
+  <div class="card"><div class="card-head"><h2>Income vs expenses</h2><div class="legend"><span><i style="background:var(--green)"></i>Income</span><span><i style="background:var(--red)"></i>Expenses</span></div></div><div class="chart-box"><canvas id="chIE" aria-label="Income versus expenses"></canvas></div></div>
+  <div class="card"><div class="card-head"><h2>Where the income comes from</h2></div><div class="chart-box"><canvas id="chMix" aria-label="Income by type"></canvas></div></div>
+</section>
+
+<section class="grid cols-2" style="margin-top:16px">
+  <div class="card"><div class="card-head"><h2>Net profit trend</h2></div><div class="chart-box short"><canvas id="chTrend" aria-label="Net profit trend"></canvas></div></div>
+  <div class="card"><div class="card-head"><h2>Best-performing weekdays</h2><span class="small muted">Average net per active day</span></div><div class="chart-box short"><canvas id="chWeekday" aria-label="Average net profit by weekday"></canvas></div></div>
+</section>
+
+<section class="grid cols-2" style="margin-top:16px">
+  <div class="card"><div class="card-head"><h2>Most expensive categories</h2></div><div id="catBars"></div></div>
+  <div class="card"><div class="card-head"><h2>Best days</h2><span class="small muted">Highest net profit</span></div><div class="table-wrap"><table><thead><tr><th>Date</th><th class="r">Income</th><th class="r">Expenses</th><th class="r">Net</th></tr></thead><tbody id="bestDays"></tbody></table></div></div>
+</section>
+
+<section class="card" style="margin-top:16px">
+  <div class="card-head"><h2>Compared with the previous period</h2><span class="small muted" id="prevLabel"></span></div>
+  <div class="table-wrap"><table><thead><tr><th></th><th class="r">This period</th><th class="r">Previous</th><th class="r">Change</th></tr></thead><tbody id="compare"></tbody></table></div>
+</section>
+
+<section class="card" style="margin-top:16px">
+  <div class="card-head"><h2 id="tableTitle">Breakdown</h2></div>
+  <div class="table-wrap"><table><thead><tr><th>Period</th><th class="r">Income</th><th class="r">Tips</th><th class="r">Expenses</th><th class="r">Fuel</th><th class="r">Net profit</th></tr></thead><tbody id="series"></tbody><tfoot id="seriesFoot"></tfoot></table></div>
+</section>
+
+    </main>
+  </div>
+</div>
+
+<nav class="tabbar" aria-label="Mobile navigation">
+  
+  <a href="index.html" class="tab"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg><span>Dashboard</span></a>
+  
+  <a href="transactions.html" class="tab"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>Transactions</span></a>
+  
+  <a href="shifts.html" class="tab"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8v5l3 2M12 3a9 9 0 100 18 9 9 0 000-18z"/></svg><span>Shifts</span></a>
+  
+  <a href="fuel.html" class="tab"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V5a2 2 0 012-2h6a2 2 0 012 2v16M5 21h10M15 9h2a2 2 0 012 2v5a1.5 1.5 0 003 0V8l-3-3M7 8h6"/></svg><span>Fuel</span></a>
+  
+  <button class="tab tab-add" data-quick-add type="button" aria-label="Add transaction"><span>+</span></button>
+  <button class="tab" id="moreBtn" type="button" aria-haspopup="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h.01M12 12h.01M19 12h.01"/></svg><span>More</span></button>
+</nav>
+<div class="more-sheet" id="moreSheet" hidden>
+  
+  <a href="budgets.html" class="nav-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 109 9h-9V3z"/></svg><span>Budgets</span></a>
+  
+  <a href="goals.html" class="nav-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.6-7-11a4 4 0 017-2.6A4 4 0 0119 10c0 6.4-7 11-7 11z"/></svg><span>Savings</span></a>
+  
+  <a href="reports.html" class="nav-link active"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10m6 10V4m6 16v-7m4 7H2"/></svg><span>Reports</span></a>
+  
+  <a href="settings.html" class="nav-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a3 3 0 100-6 3 3 0 000 6zm7.4-3a7.4 7.4 0 00-.1-1.2l2-1.6-2-3.4-2.4 1a7.6 7.6 0 00-2-1.2L14.5 3h-4l-.4 2.6a7.6 7.6 0 00-2 1.2l-2.4-1-2 3.4 2 1.6a7.4 7.4 0 000 2.4l-2 1.6 2 3.4 2.4-1a7.6 7.6 0 002 1.2l.4 2.6h4l.4-2.6a7.6 7.6 0 002-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z"/></svg><span>Settings</span></a>
+  
+  <button class="nav-link" id="themeToggle2" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg><span>Switch theme</span></button>
+</div>
+
+<div id="modalRoot"></div>
+<div id="toasts" class="toasts" aria-live="polite"></div>
+
+<script src="shim.js" data-scripts="static/js/vendor/chart.umd.js,static/js/app.js,static/js/reports.js"></script>
+</body>
+</html>
